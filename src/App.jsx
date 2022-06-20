@@ -32,7 +32,7 @@ const cards = [
         content:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut diam quam nulla porttitor. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus.',
         from: 'Lorem Ipsum',
-        about: 'Harta be Pita',
+        about: 'Humus Chips Salad',
         img: 'https://pbs.twimg.com/media/D8dDZukXUAAXLdY.jpg',
     },
     {
@@ -46,7 +46,7 @@ const cards = [
         content: 'Pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus.',
         from: 'Hipi Hipo',
         about: 'Illusion Bakery Inc',
-        img: 'https://pbs.twimg.com/media/D8dDZukXUAAXLdY.jpg',
+        img: 'https://qph.cf2.quoracdn.net/main-qimg-4b400f8e35a79a82babb0c145b317be7-lq',
     },
 ];
 

@@ -9,6 +9,7 @@ export default function CardsCarousel({ cards }) {
     const [xDirection, setXDirection] = useState(200);
     const [cardVariantName, setCardVariantName] = useState('stop');
 
+    // Get the previous and the prior cards
     const currentIndexPrevius = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
     const currentIndexPrior = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
 
@@ -23,6 +24,7 @@ export default function CardsCarousel({ cards }) {
         return () => clearInterval(sliderInterval);
     }, []);
 
+    // Start animation on cards
     const startCardAnimation = () => {
         setCardVariantName('start');
         const animationTimeOut = setTimeout(() => {
@@ -31,18 +33,18 @@ export default function CardsCarousel({ cards }) {
         }, 100);
     };
 
-    // Decalare variants to for card animation
+    // Decalare variants for cards animation
     const cardVariant = {
         previous: {
             x: [xDirection, 0],
-            scale: [xDirection < 0 ? 0.7 : 1, 0.8],
-            opacity: [xDirection < 0 ? 0.1 : 1, 0.6],
+            scale: [xDirection > 0 ? 0.7 : 1, 0.8],
+            opacity: [xDirection > 0 ? 0.1 : 1, 0.6],
             transition: { duration: 0.3 },
         },
         prior: {
             x: [xDirection, 0],
-            scale: [xDirection > 0 ? 0.7 : 1, 0.8],
-            opacity: [xDirection > 0 ? 0.1 : 1, 0.6],
+            scale: [xDirection < 0 ? 0.7 : 1, 0.8],
+            opacity: [xDirection < 0 ? 0.1 : 1, 0.6],
             transition: { duration: 0.3 },
         },
         active: {
@@ -63,10 +65,10 @@ export default function CardsCarousel({ cards }) {
         <div className='CardsCarousel'>
             <div className='cards'>
                 <motion.div
-                    className='previous-card'
+                    className='prior-card'
                     variants={cardVariant}
-                    animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
-                    <Card card={cards[currentIndexPrevius]} />
+                    animate={cardVariantName === 'start' ? 'prior' : 'stop'}>
+                    <Card card={cards[currentIndexPrior]} />
                 </motion.div>
                 <div className='active-card'>
                     <motion.div variants={cardVariant} animate={cardVariantName === 'start' ? 'active' : 'active2'}>
@@ -74,10 +76,10 @@ export default function CardsCarousel({ cards }) {
                     </motion.div>
                 </div>
                 <motion.div
-                    className='prior-card'
+                    className='previous-card'
                     variants={cardVariant}
-                    animate={cardVariantName === 'start' ? 'prior' : 'stop'}>
-                    <Card card={cards[currentIndexPrior]} />
+                    animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
+                    <Card card={cards[currentIndexPrevius]} />
                 </motion.div>
             </div>
             <div className='cards-btns'>
