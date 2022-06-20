@@ -37,13 +37,13 @@ export default function CardsCarousel({ cards }) {
     const cardVariant = {
         previous: {
             x: [xDirection, 0],
-            scale: [xDirection > 0 ? 0.7 : 1, 0.8],
+            scale: [xDirection > 0 ? 0.4 : 1, 0.8],
             opacity: [xDirection > 0 ? 0.1 : 1, 0.6],
             transition: { duration: 0.3 },
         },
         prior: {
             x: [xDirection, 0],
-            scale: [xDirection < 0 ? 0.7 : 1, 0.8],
+            scale: [xDirection < 0 ? 0.4 : 1, 0.8],
             opacity: [xDirection < 0 ? 0.1 : 1, 0.6],
             transition: { duration: 0.3 },
         },
