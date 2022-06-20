@@ -10,7 +10,7 @@ export default function Card({ card }) {
         <div className='Card'>
             <p className='card-content'>" {card.content} "</p>
 
-            <div className='wave-background'>
+            <div className={`wave-background wave-background-${card.bgNumber}`}>
                 <div className='card-image'>
                     <img src={card.img} alt={card.from} />
                 </div>

@@ -16,9 +16,6 @@
     }
 
     .wave-background {
-        background-color: rgb(57, 120, 229);
-        border-radius: 15px;
-
         p {
             font-weight: 600;
         }
@@ -68,4 +65,16 @@
             }
         }
     }
+}
+
+.wave-background-0 {
+    background-image: url(../svg/card-wave-bg0.svg);
+}
+
+.wave-background-1 {
+    background-image: url(../svg/card-wave-bg1.svg);
+}
+
+.wave-background-2 {
+    background-image: url(../svg/card-wave-bg2.svg);
 }

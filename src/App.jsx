@@ -13,6 +13,7 @@ const cards = [
         from: 'Bar Levi',
         about: 'Freelance Programmer',
         img: images.ProfileBarLevi,
+        bgNumber: 0,
     },
     {
         content:
@@ -20,6 +21,7 @@ const cards = [
         from: 'Melanie Cruise',
         about: 'Engineering Student, MIT',
         img: images.ProfileMelanieCruise,
+        bgNumber: 1,
     },
     {
         content:
@@ -27,6 +29,7 @@ const cards = [
         from: 'Tom Yorke',
         about: 'Communication Student, Harvard',
         img: images.ProfileTomYorke,
+        bgNumber: 2,
     },
     {
         content:
@@ -34,6 +37,7 @@ const cards = [
         from: 'Lorem Ipsum',
         about: 'Humus Chips Salad',
         img: 'https://pbs.twimg.com/media/D8dDZukXUAAXLdY.jpg',
+        bgNumber: 0,
     },
     {
         content:
@@ -41,12 +45,14 @@ const cards = [
         from: 'Henry Pushbutton',
         about: 'Button Pro Press',
         img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
+        bgNumber: 1,
     },
     {
         content: 'Pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus.',
         from: 'Hipi Hipo',
         about: 'Illusion Bakery Inc',
         img: 'https://qph.cf2.quoracdn.net/main-qimg-4b400f8e35a79a82babb0c145b317be7-lq',
+        bgNumber: 2,
     },
 ];
 

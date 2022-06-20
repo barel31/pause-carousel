@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Card from './Card';
 import './CardsCarousel.scss';
 
+// import { ReactComponent as CardWaveBG } from '../svg/card-wave-bg.svg';
+
 export default function CardsCarousel({ cards }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [xDirection, setXDirection] = useState(400);
