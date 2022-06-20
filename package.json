@@ -1,6 +1,6 @@
 {
   "name": "pause-carousel",
-  "hostname": "http://barel31.github.io/pause-carousel",
+  "homepage": "http://barel31.github.io/pause-carousel",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
