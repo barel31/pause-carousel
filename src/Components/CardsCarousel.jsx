@@ -22,7 +22,7 @@ export default function CardsCarousel({ cards }) {
 
         // Clear The interval on unmount
         return () => clearInterval(sliderInterval);
-    }, [currentIndex]);
+    }, [currentIndexPrior]);
 
     // Start animation on cards
     const startCardAnimation = () => {
@@ -37,7 +37,7 @@ export default function CardsCarousel({ cards }) {
     const cardVariant = {
         previous: {
             x: [xDirection, 0],
-            scale: [xDirection * 2 > 0 ? 0.7 : 1, 0.8],
+            scale: [xDirection > 0 ? 0.7 : 1, 0.8],
             opacity: [xDirection > 0 ? 0.1 : 1, 0.6],
             transition: { duration: 0.3 },
         },
@@ -49,7 +49,7 @@ export default function CardsCarousel({ cards }) {
         },
         active: {
             x: [xDirection, 0],
-            scale: [0.7, 1],
+            scale: [0.8, 1],
             opacity: [0.6, 1],
             transition: { duration: 0.3 },
         },
