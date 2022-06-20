@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/pause-carousel/static/css/main.cfb8558d.css",
-    "main.js": "/pause-carousel/static/js/main.c60d72e3.js",
+    "main.css": "/pause-carousel/static/css/main.ed530b5c.css",
+    "main.js": "/pause-carousel/static/js/main.ff9d787e.js",
     "static/media/ProfileMelanieCruise.jpg": "/pause-carousel/static/media/ProfileMelanieCruise.661beccc33c29eb9eea1.jpg",
     "static/media/ProfileTomYorke.jpg": "/pause-carousel/static/media/ProfileTomYorke.aba288492b8fb0a1510a.jpg",
     "static/media/ProfileBarLevi.jpg": "/pause-carousel/static/media/ProfileBarLevi.a9b3435f8b6fe74872b6.jpg",
@@ -11,11 +11,14 @@
     "static/media/facebook.svg": "/pause-carousel/static/media/facebook.cc6e72c66a3148a0c6c2a695dc30330b.svg",
     "index.html": "/pause-carousel/index.html",
     "static/media/offset-left.svg": "/pause-carousel/static/media/offset-left.4479ac5117fced80ca5240cd2e888d0c.svg",
-    "main.cfb8558d.css.map": "/pause-carousel/static/css/main.cfb8558d.css.map",
-    "main.c60d72e3.js.map": "/pause-carousel/static/js/main.c60d72e3.js.map"
+    "static/media/card-wave-bg0.svg": "/pause-carousel/static/media/card-wave-bg0.9059ae5ffe3be01b458f.svg",
+    "static/media/card-wave-bg1.svg": "/pause-carousel/static/media/card-wave-bg1.3fe1e587298b2b21f3b9.svg",
+    "static/media/card-wave-bg2.svg": "/pause-carousel/static/media/card-wave-bg2.3f55a2df9235ef99835b.svg",
+    "main.ed530b5c.css.map": "/pause-carousel/static/css/main.ed530b5c.css.map",
+    "main.ff9d787e.js.map": "/pause-carousel/static/js/main.ff9d787e.js.map"
   },
   "entrypoints": [
-    "static/css/main.cfb8558d.css",
-    "static/js/main.c60d72e3.js"
+    "static/css/main.ed530b5c.css",
+    "static/js/main.ff9d787e.js"
   ]
 }
