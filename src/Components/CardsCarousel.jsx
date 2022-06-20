@@ -6,7 +6,7 @@ import './CardsCarousel.scss';
 
 export default function CardsCarousel({ cards }) {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [xDirection, setXDirection] = useState(200);
+    const [xDirection, setXDirection] = useState(400);
     const [cardVariantName, setCardVariantName] = useState('stop');
 
     // Get the previous and the prior cards
@@ -37,7 +37,7 @@ export default function CardsCarousel({ cards }) {
     const cardVariant = {
         previous: {
             x: [xDirection, 0],
-            scale: [xDirection > 0 ? 0.7 : 1, 0.8],
+            scale: [xDirection * 2 > 0 ? 0.7 : 1, 0.8],
             opacity: [xDirection > 0 ? 0.1 : 1, 0.6],
             transition: { duration: 0.3 },
         },
@@ -49,7 +49,7 @@ export default function CardsCarousel({ cards }) {
         },
         active: {
             x: [xDirection, 0],
-            scale: [0.9, 1],
+            scale: [0.7, 1],
             opacity: [0.6, 1],
             transition: { duration: 0.3 },
         },
@@ -86,7 +86,7 @@ export default function CardsCarousel({ cards }) {
                 <div
                     onClick={() => {
                         setCurrentIndex(currentIndexPrevius);
-                        setXDirection(xDirection === 200 ? 201 : 200);
+                        setXDirection(xDirection === 400 ? 401 : 400);
                         startCardAnimation();
                     }}>
                     <HiChevronLeft />
@@ -94,7 +94,7 @@ export default function CardsCarousel({ cards }) {
                 <div
                     onClick={() => {
                         setCurrentIndex(currentIndexPrior);
-                        setXDirection(xDirection === -200 ? -201 : -200);
+                        setXDirection(xDirection === -400 ? -401 : -400);
                         startCardAnimation();
                     }}>
                     <HiChevronRight />
