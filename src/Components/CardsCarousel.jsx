@@ -17,7 +17,6 @@ export default function CardsCarousel({ cards }) {
     useEffect(() => {
         const sliderInterval = setInterval(() => {
             setCurrentIndex(currentIndexPrior);
-            console.log(currentIndex);
             startCardAnimation();
         }, 10000);
 
