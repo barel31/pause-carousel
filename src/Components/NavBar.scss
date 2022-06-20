@@ -14,7 +14,7 @@
         cursor: pointer;
         text-decoration: none;
         font-size: 1.1rem;
-        font-weight: 600;
+        font-weight: 400;
 
         span {
             width: 15%;
@@ -37,11 +37,10 @@
             display: flex;
             align-items: center;
 
-            
             svg {
                 width: 100px;
                 height: 100px;
-                
+
                 path {
                     transition: all 0.3s ease-in-out;
                 }
@@ -110,38 +109,49 @@
     }
 }
 
-.nav-arrow-animation {
-    &:hover {
+.nav-contact {
+    height: 40px;
+    margin-top: 20px;
+
+    a {
         span {
-            transform: rotate(180deg) translateX(-5px);
+            display: inline-block;
+            transition: transform 0.2s;
+            top: 3px;
+        }
+    }
+    &:hover {
+        a {
+            span {
+                transform: rotate(180deg) translateX(-5px) translateY(-15px);
+            }
         }
     }
 
-    span {
-        display: inline-block;
-        transition: transform 0.2s;
-    }
-}
+    .nav-contact-drop-down {
+        position: absolute;
+        top: 50px;
+        z-index: 5;
+        width: 150px;
+        height: 100px;
+        border-radius: 15px;
 
-.nav-contact-drop-down {
-    position: absolute;
-    top: 40px;
-    z-index: 5;
-    width: 150px;
-    height: 100px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    a {
-        margin: 0 1rem;
-        color: #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
 
-        &:hover {
-            text-shadow: 1px 1px 2px;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        a {
+            margin: 0 1rem;
+            color: #000;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                text-shadow: 1px 1px 1px;
+            }
         }
     }
 }

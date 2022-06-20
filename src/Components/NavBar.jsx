@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
+import { motion } from 'framer-motion';
 import './NavBar.scss';
 
 // Load svgs
@@ -14,7 +15,7 @@ export default function NavBar() {
     return (
         <nav className='NavBar'>
             <div className='nav-logo'>
-                <a href='/'>
+                <a href='#'>
                     <Logo />
                     <Icon />
                 </a>
@@ -24,25 +25,28 @@ export default function NavBar() {
                 <a href='#' className='hover-pink'>
                     About
                 </a>
-                <a
-                    href='#'
-                    className='hover-blue nav-arrow-animation'
+                <div
+                    className='nav-contact'
                     onMouseOver={() => setDropDownMenu(true)}
                     onMouseLeave={() => setDropDownMenu(false)}>
-                    Contact
-                    <span>
-                        <HiChevronDown />
-                    </span>
-                </a>
-                {dropDownMenu && (
-                    <div
-                        className='nav-contact-drop-down'
-                        onMouseOver={() => setDropDownMenu(true)}
-                        onMouseLeave={() => setDropDownMenu(false)}>
-                        <a href='#'>FAQ</a>
-                        <a href='#'>Contact Us</a>
-                    </div>
-                )}
+                    <a href='#' className='hover-blue'>
+                        Contact{' '}
+                        <span>
+                            <HiChevronDown />
+                        </span>
+                    </a>
+                    {dropDownMenu && (
+                        <motion.div
+                            className='nav-contact-drop-down'
+                            onMouseOver={() => setDropDownMenu(true)}
+                            onMouseLeave={() => setDropDownMenu(false)}
+                            animate={{ maxHeight: [0, 100] }}
+                            transition={{ duration: 0.2 }}>
+                            <a href='#'>FAQ</a>
+                            <a href='#'>Contact Us</a>
+                        </motion.div>
+                    )}
+                </div>
                 <a href='#' className='hover-orange'>
                     Pricing
                 </a>
