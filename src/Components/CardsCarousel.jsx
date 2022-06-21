@@ -87,16 +87,16 @@ export default function CardsCarousel({ cards }) {
             <div className='cards-btns'>
                 <div
                     onClick={() => {
-                        setCurrentIndex(currentIndexPrevius);
-                        setXDirection(xDirection === 400 ? 401 : 400);
+                        setCurrentIndex(currentIndexPrior);
+                        setXDirection(xDirection === -400 ? -401 : -400);
                         startCardAnimation();
                     }}>
                     <HiChevronLeft />
                 </div>
                 <div
                     onClick={() => {
-                        setCurrentIndex(currentIndexPrior);
-                        setXDirection(xDirection === -400 ? -401 : -400);
+                        setCurrentIndex(currentIndexPrevius);
+                        setXDirection(xDirection === 400 ? 401 : 400);
                         startCardAnimation();
                     }}>
                     <HiChevronRight />
