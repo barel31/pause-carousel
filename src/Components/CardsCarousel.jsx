@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import Card from './Card';
 import './CardsCarousel.scss';
 
-// import { ReactComponent as CardWaveBG } from '../svg/card-wave-bg.svg';
-
 export default function CardsCarousel({ cards }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [xDirection, setXDirection] = useState(400);
@@ -41,19 +39,19 @@ export default function CardsCarousel({ cards }) {
             x: [xDirection, 0],
             scale: [xDirection > 0 ? 0.4 : 1, 0.8],
             opacity: [xDirection > 0 ? 0.1 : 1, 0.6],
-            transition: { duration: 0.3 },
+            transition: { duration: 0.4 },
         },
         prior: {
             x: [xDirection, 0],
             scale: [xDirection < 0 ? 0.4 : 1, 0.8],
             opacity: [xDirection < 0 ? 0.1 : 1, 0.6],
-            transition: { duration: 0.3 },
+            transition: { duration: 0.4 },
         },
         active: {
             x: [xDirection, 0],
             scale: [0.8, 1],
             opacity: [0.6, 1],
-            transition: { duration: 0.3 },
+            transition: { duration: 0.4 },
         },
         active2: {
             x: 0,
