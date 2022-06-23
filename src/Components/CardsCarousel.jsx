@@ -81,7 +81,7 @@ export default function CardsCarousel({ cards }) {
             <motion.div
                 className='cards'
                 drag='x'
-                dragConstraints={{ left: 100, right: 0 }}
+                dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.1}
                 onDragEnd={(e, { offset, velocity }) => {
                     const swipe = swipePower(offset.x, velocity.x);
@@ -92,15 +92,13 @@ export default function CardsCarousel({ cards }) {
                         moveCarousel(currentIndexPrevius, bigScreen ? -300 : -400);
                     }
                 }}>
-                <AnimatePresence>
-                    <motion.div
-                        className='prior-card'
-                        variants={cardVariant(offsetX)}
-                        animate={cardVariantName === 'start' ? 'prior' : 'stop'}
-                        exit='exit'>
-                        <Card card={cards[currentIndexPrior]} />
-                    </motion.div>
-                </AnimatePresence>
+                <motion.div
+                    className='prior-card'
+                    variants={cardVariant(offsetX)}
+                    animate={cardVariantName === 'start' ? 'prior' : 'stop'}
+                    exit='exit'>
+                    <Card card={cards[currentIndexPrior]} />
+                </motion.div>
 
                 <div className='active-card'>
                     <motion.div
@@ -109,15 +107,12 @@ export default function CardsCarousel({ cards }) {
                         <Card card={cards[currentIndex]} />
                     </motion.div>
                 </div>
-                <AnimatePresence>
-                    <motion.div
-                        className='previous-card'
-                        variants={cardVariant(offsetX)}
-                        animate={cardVariantName === 'start' ? 'previous' : 'stop'}
-                        exit='exit'>
-                        <Card card={cards[currentIndexPrevius]} />
-                    </motion.div>
-                </AnimatePresence>
+                <motion.div
+                    className='previous-card'
+                    variants={cardVariant(offsetX)}
+                    animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
+                    <Card card={cards[currentIndexPrevius]} />
+                </motion.div>
             </motion.div>
             <div className='cards-btns'>
                 <div onClick={() => moveCarousel(currentIndexPrior, bigScreen ? -300 : -400)}>
