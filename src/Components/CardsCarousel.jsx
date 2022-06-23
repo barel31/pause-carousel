@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 import Card from './Card';
 import './CardsCarousel.scss';
@@ -31,7 +31,13 @@ const cardVariant = (offsetX) => ({
         opacity: 1,
     },
     stop: { x: 0, scale: 0.8, opacity: 0.6 },
+    exit: { x: offsetX > 0 ? -600 : 600, scale: 0, opacity: 0 },
 });
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset, velocity) => {
+    return Math.abs(offset) * velocity;
+};
 
 export default function CardsCarousel({ cards }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -72,25 +78,47 @@ export default function CardsCarousel({ cards }) {
 
     return (
         <div className='CardsCarousel'>
-            <div className='cards'>
-                <motion.div
-                    className='prior-card'
-                    variants={cardVariant(offsetX)}
-                    animate={cardVariantName === 'start' ? 'prior' : 'stop'}>
-                    <Card card={cards[currentIndexPrior]} />
-                </motion.div>
+            <motion.div
+                className='cards'
+                drag='x'
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(_, { offset, velocity }) => {
+                    const swipe = swipePower(offset.x, velocity.x);
+
+                    if (swipe < -swipeConfidenceThreshold) {
+                        setCurrentIndex(currentIndexPrevius);
+                    } else if (swipe > swipeConfidenceThreshold) {
+                        setCurrentIndex(currentIndexPrior);
+                    }
+                }}>
+                <AnimatePresence>
+                    <motion.div
+                        className='prior-card'
+                        variants={cardVariant(offsetX)}
+                        animate={cardVariantName === 'start' ? 'prior' : 'stop'}
+                        exit='exit'>
+                        <Card card={cards[currentIndexPrior]} />
+                    </motion.div>
+                </AnimatePresence>
+
                 <div className='active-card'>
-                    <motion.div variants={cardVariant(offsetX)} animate={cardVariantName === 'start' ? 'active' : 'stopActive'}>
+                    <motion.div
+                        variants={cardVariant(offsetX)}
+                        animate={cardVariantName === 'start' ? 'active' : 'stopActive'}>
                         <Card card={cards[currentIndex]} />
                     </motion.div>
                 </div>
-                <motion.div
-                    className='previous-card'
-                    variants={cardVariant(offsetX)}
-                    animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
-                    <Card card={cards[currentIndexPrevius]} />
-                </motion.div>
-            </div>
+                <AnimatePresence>
+                    <motion.div
+                        className='previous-card'
+                        variants={cardVariant(offsetX)}
+                        animate={cardVariantName === 'start' ? 'previous' : 'stop'}
+                        exit='exit'>
+                        <Card card={cards[currentIndexPrevius]} />
+                    </motion.div>
+                </AnimatePresence>
+            </motion.div>
             <div className='cards-btns'>
                 <div onClick={() => moveCarousel(currentIndexPrior, bigScreen ? -300 : -400)}>
                     <HiChevronLeft />
