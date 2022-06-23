@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Card from './Card';
 import './CardsCarousel.scss';
 
+import Carousel from 'react-bootstrap/Carousel';
+
 export default function CardsCarousel({ cards }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [xDirection, setXDirection] = useState(400);
@@ -62,44 +64,52 @@ export default function CardsCarousel({ cards }) {
     };
 
     return (
-        <div className='CardsCarousel'>
-            <div className='cards'>
-                <motion.div
-                    className='prior-card'
-                    variants={cardVariant}
-                    animate={cardVariantName === 'start' ? 'prior' : 'stop'}>
-                    <Card card={cards[currentIndexPrior]} />
-                </motion.div>
-                <div className='active-card'>
-                    <motion.div variants={cardVariant} animate={cardVariantName === 'start' ? 'active' : 'active2'}>
-                        <Card card={cards[currentIndex]} />
-                    </motion.div>
-                </div>
-                <motion.div
-                    className='previous-card'
-                    variants={cardVariant}
-                    animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
-                    <Card card={cards[currentIndexPrevius]} />
-                </motion.div>
-            </div>
-            <div className='cards-btns'>
-                <div
-                    onClick={() => {
-                        setCurrentIndex(currentIndexPrior);
-                        setXDirection(xDirection === -400 ? -401 : -400);
-                        startCardAnimation();
-                    }}>
-                    <HiChevronLeft />
-                </div>
-                <div
-                    onClick={() => {
-                        setCurrentIndex(currentIndexPrevius);
-                        setXDirection(xDirection === 400 ? 401 : 400);
-                        startCardAnimation();
-                    }}>
-                    <HiChevronRight />
-                </div>
-            </div>
-        </div>
+        // <Carousel activeIndex={currentIndex}>
+        <Carousel>
+            {cards.map((card, i) => (
+                <Carousel.Item key={i}>
+                    <Card card={card} />
+                </Carousel.Item>
+            ))}
+        </Carousel>
+        //     <div className='CardsCarousel'>
+        //         <div className='cards'>
+        //             <motion.div
+        //                 className='prior-card'
+        //                 variants={cardVariant}
+        //                 animate={cardVariantName === 'start' ? 'prior' : 'stop'}>
+        //                 <Card card={cards[currentIndexPrior]} />
+        //             </motion.div>
+        //             <div className='active-card'>
+        //                 <motion.div variants={cardVariant} animate={cardVariantName === 'start' ? 'active' : 'active2'}>
+        //                     <Card card={cards[currentIndex]} />
+        //                 </motion.div>
+        //             </div>
+        //             <motion.div
+        //                 className='previous-card'
+        //                 variants={cardVariant}
+        //                 animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
+        //                 <Card card={cards[currentIndexPrevius]} />
+        //             </motion.div>
+        //         </div>
+        //         <div className='cards-btns'>
+        //             <div
+        //                 onClick={() => {
+        //                     setCurrentIndex(currentIndexPrior);
+        //                     setXDirection(xDirection === -400 ? -401 : -400);
+        //                     startCardAnimation();
+        //                 }}>
+        //                 <HiChevronLeft />
+        //             </div>
+        //             <div
+        //                 onClick={() => {
+        //                     setCurrentIndex(currentIndexPrevius);
+        //                     setXDirection(xDirection === 400 ? 401 : 400);
+        //                     startCardAnimation();
+        //                 }}>
+        //                 <HiChevronRight />
+        //             </div>
+        //         </div>
+        //     </div>
     );
 }
