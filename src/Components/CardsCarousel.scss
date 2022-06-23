@@ -1,16 +1,6 @@
 .CardsCarousel {
     margin: auto;
 
-    .cards {
-        display: flex;
-        justify-content: space-around;
-        overflow: hidden;
-        margin: auto;
-        overflow: hidden;
-        
-        cursor: grab;
-    }
-
     .cards-btns {
         margin: 1rem auto;
         display: flex;
@@ -32,6 +22,25 @@
                 color: #fff;
                 background-color: rgb(69, 68, 99);
             }
+        }
+    }
+}
+
+.carousel {
+    overflow: hidden;
+    width: 50vw;
+    margin: auto;
+    
+    overflow: hidden;
+    
+    &-inner {
+        display: flex;
+        cursor: grab;
+        
+        // width: 500px;
+        
+        &-item {
+            padding: 2rem 0.5rem;
         }
     }
 }
