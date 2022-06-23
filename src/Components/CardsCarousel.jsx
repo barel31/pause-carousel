@@ -1,12 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { motion } from 'framer-motion';
+import { useMediaQuery } from 'react-responsive';
 import Card from './Card';
 import './CardsCarousel.scss';
 
+// Decalare variants for cards animation
+const cardVariant = (offsetX) => ({
+    previous: {
+        x: [offsetX, 0],
+        scale: [offsetX > 0 ? 0.4 : 1, 0.8],
+        opacity: [offsetX > 0 ? 0.1 : 1, 0.6],
+        transition: { duration: 0.4 },
+    },
+    prior: {
+        x: [offsetX, 0],
+        scale: [offsetX < 0 ? 0.4 : 1, 0.8],
+        opacity: [offsetX < 0 ? 0.1 : 1, 0.6],
+        transition: { duration: 0.4 },
+    },
+    active: {
+        x: [offsetX, 0],
+        scale: [0.8, 1],
+        opacity: [0.6, 1],
+        transition: { duration: 0.4 },
+    },
+    stopActive: {
+        x: 0,
+        scale: 1,
+        opacity: 1,
+    },
+    stop: { x: 0, scale: 0.8, opacity: 0.6 },
+});
+
 export default function CardsCarousel({ cards }) {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [xDirection, setXDirection] = useState(400);
+    const [offsetX, setoffsetX] = useState(0);
     const [cardVariantName, setCardVariantName] = useState('stop');
 
     // Get the previous and the prior cards
@@ -16,13 +45,13 @@ export default function CardsCarousel({ cards }) {
     // Slide cards every 10 secs
     useEffect(() => {
         const sliderInterval = setInterval(() => {
-            setCurrentIndex(xDirection > 0 ? currentIndexPrevius : currentIndexPrior);
+            setCurrentIndex(offsetX > 0 ? currentIndexPrevius : currentIndexPrior);
             startCardAnimation();
         }, 10000);
 
         // Clear The interval on unmount
         return () => clearInterval(sliderInterval);
-    }, [currentIndexPrior]);
+    }, [currentIndex]);
 
     // Start animation on cards
     const startCardAnimation = () => {
@@ -33,70 +62,40 @@ export default function CardsCarousel({ cards }) {
         }, 100);
     };
 
-    // Decalare variants for cards animation
-    const cardVariant = {
-        previous: {
-            x: [xDirection, 0],
-            scale: [xDirection > 0 ? 0.4 : 1, 0.8],
-            opacity: [xDirection > 0 ? 0.1 : 1, 0.6],
-            transition: { duration: 0.4 },
-        },
-        prior: {
-            x: [xDirection, 0],
-            scale: [xDirection < 0 ? 0.4 : 1, 0.8],
-            opacity: [xDirection < 0 ? 0.1 : 1, 0.6],
-            transition: { duration: 0.4 },
-        },
-        active: {
-            x: [xDirection, 0],
-            scale: [0.8, 1],
-            opacity: [0.6, 1],
-            transition: { duration: 0.4 },
-        },
-        active2: {
-            x: 0,
-            scale: 1,
-            opacity: 1,
-        },
-        stop: { x: 0, scale: 0.8, opacity: 0.6 },
+    const moveCarousel = (cardIndex, x) => {
+        setCurrentIndex(cardIndex);
+        setoffsetX(x === offsetX ? x + 1 : x);
+        startCardAnimation();
     };
+
+    const bigScreen = useMediaQuery({ query: `(max-width: 1200px)` });
 
     return (
         <div className='CardsCarousel'>
             <div className='cards'>
                 <motion.div
                     className='prior-card'
-                    variants={cardVariant}
+                    variants={cardVariant(offsetX)}
                     animate={cardVariantName === 'start' ? 'prior' : 'stop'}>
                     <Card card={cards[currentIndexPrior]} />
                 </motion.div>
                 <div className='active-card'>
-                    <motion.div variants={cardVariant} animate={cardVariantName === 'start' ? 'active' : 'active2'}>
+                    <motion.div variants={cardVariant(offsetX)} animate={cardVariantName === 'start' ? 'active' : 'stopActive'}>
                         <Card card={cards[currentIndex]} />
                     </motion.div>
                 </div>
                 <motion.div
                     className='previous-card'
-                    variants={cardVariant}
+                    variants={cardVariant(offsetX)}
                     animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
                     <Card card={cards[currentIndexPrevius]} />
                 </motion.div>
             </div>
             <div className='cards-btns'>
-                <div
-                    onClick={() => {
-                        setCurrentIndex(currentIndexPrior);
-                        setXDirection(xDirection === -400 ? -401 : -400);
-                        startCardAnimation();
-                    }}>
+                <div onClick={() => moveCarousel(currentIndexPrior, bigScreen ? -300 : -400)}>
                     <HiChevronLeft />
                 </div>
-                <div
-                    onClick={() => {
-                        setCurrentIndex(currentIndexPrevius);
-                        setXDirection(xDirection === 400 ? 401 : 400);
-                        startCardAnimation();
-                    }}>
+                <div onClick={() => moveCarousel(currentIndexPrevius, bigScreen ? 300 : 400)}>
                     <HiChevronRight />
                 </div>
             </div>

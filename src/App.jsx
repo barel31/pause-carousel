@@ -65,9 +65,7 @@ export default function App() {
                 <p className='p-text'>
                     We can talk and talk... but what really matters is <span>your opinion</span> of PAUSE
                 </p>
-                <div className='cards'>
-                    <CardsCarousel cards={cards} />
-                </div>
+                <CardsCarousel cards={cards} />
             </div>
         </div>
     );
