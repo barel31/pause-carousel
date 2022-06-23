@@ -74,7 +74,7 @@ export default function CardsCarousel({ cards }) {
         startCardAnimation();
     };
 
-    const bigScreen = useMediaQuery({ query: `(max-width: 1200px)` });
+    const smallScreen = useMediaQuery({ query: `(max-width: 1200px)` });
 
     return (
         <div className='CardsCarousel'>
@@ -87,9 +87,9 @@ export default function CardsCarousel({ cards }) {
                     const swipe = swipePower(offset.x, velocity.x);
 
                     if (swipe < -swipeConfidenceThreshold) {
-                        moveCarousel(currentIndexPrior, bigScreen ? 300 : 400);
+                        moveCarousel(currentIndexPrevius, smallScreen ? 300 : 400);
                     } else if (swipe > swipeConfidenceThreshold) {
-                        moveCarousel(currentIndexPrevius, bigScreen ? -300 : -400);
+                        moveCarousel(currentIndexPrior, smallScreen ? -300 : -400);
                     }
                 }}>
                 <motion.div
@@ -115,10 +115,10 @@ export default function CardsCarousel({ cards }) {
                 </motion.div>
             </motion.div>
             <div className='cards-btns'>
-                <div onClick={() => moveCarousel(currentIndexPrior, bigScreen ? -300 : -400)}>
+                <div onClick={() => moveCarousel(currentIndexPrior, smallScreen ? -300 : -400)}>
                     <HiChevronLeft />
                 </div>
-                <div onClick={() => moveCarousel(currentIndexPrevius, bigScreen ? 300 : 400)}>
+                <div onClick={() => moveCarousel(currentIndexPrevius, smallScreen ? 300 : 400)}>
                     <HiChevronRight />
                 </div>
             </div>
