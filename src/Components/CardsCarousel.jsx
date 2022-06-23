@@ -36,7 +36,7 @@ const cardVariant = (offsetX) => ({
 export default function CardsCarousel({ cards }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [offsetX, setoffsetX] = useState(0);
-    const [cardVariantName, setCardVariantName] = useState('stop');
+    const [cardVariantName, setCardVariantName] = useState('stopActive');
 
     // Get the previous and the prior cards
     const currentIndexPrevius = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
@@ -72,8 +72,18 @@ export default function CardsCarousel({ cards }) {
 
     return (
         <div className='CardsCarousel'>
-            <div className='cards'>
-                <motion.div
+            <motion.div className='cards' drag='x'>
+                {cards.map((card, i) => (
+                    <motion.div
+                        key={i}
+                        className='active-card'
+                        variants={cardVariant(offsetX)}
+                        animate={cardVariantName}>
+                        <Card card={card} />
+                    </motion.div>
+                ))}
+            </motion.div>
+            {/* <motion.div
                     className='prior-card'
                     variants={cardVariant(offsetX)}
                     animate={cardVariantName === 'start' ? 'prior' : 'stop'}>
@@ -90,7 +100,7 @@ export default function CardsCarousel({ cards }) {
                     animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
                     <Card card={cards[currentIndexPrevius]} />
                 </motion.div>
-            </div>
+            </div> */}
             <div className='cards-btns'>
                 <div onClick={() => moveCarousel(currentIndexPrior, bigScreen ? -300 : -400)}>
                     <HiChevronLeft />

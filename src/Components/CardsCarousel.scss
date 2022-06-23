@@ -5,11 +5,10 @@
         display: flex;
         justify-content: space-around;
         overflow: hidden;
-        height: 440px;
         margin: auto;
-        max-width: 1200px;
-
-        overflow: clip;
+        overflow: hidden;
+        
+        cursor: grab;
     }
 
     .cards-btns {
