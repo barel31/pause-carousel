@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 import Card from './Card';
 import './CardsCarousel.scss';
@@ -34,6 +34,7 @@ const cardVariant = (offsetX) => ({
     exit: { x: offsetX > 0 ? -600 : 600, scale: 0, opacity: 0 },
 });
 
+// Taken from framer-motion docs
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset, velocity) => {
     return Math.abs(offset) * velocity;
@@ -48,6 +49,8 @@ export default function CardsCarousel({ cards }) {
     const currentIndexPrevius = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
     const currentIndexPrior = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
 
+    const smallScreen = useMediaQuery({ query: `(max-width: 1200px)` });
+
     // Slide cards every 10 secs
     useEffect(() => {
         const sliderInterval = setInterval(() => {
@@ -59,6 +62,13 @@ export default function CardsCarousel({ cards }) {
         return () => clearInterval(sliderInterval);
     }, [currentIndex]);
 
+    // Move carousel with animation
+    const moveCarousel = (cardIndex, x) => {
+        setCurrentIndex(cardIndex);
+        setoffsetX(x === offsetX ? x + 1 : x);
+        startCardAnimation();
+    };
+
     // Start animation on cards
     const startCardAnimation = () => {
         setCardVariantName('start');
@@ -68,14 +78,6 @@ export default function CardsCarousel({ cards }) {
         }, 100);
     };
 
-    const moveCarousel = (cardIndex, x) => {
-        setCurrentIndex(cardIndex);
-        setoffsetX(x === offsetX ? x + 1 : x);
-        startCardAnimation();
-    };
-
-    const smallScreen = useMediaQuery({ query: `(max-width: 1200px)` });
-
     return (
         <div className='CardsCarousel'>
             <motion.div
@@ -84,6 +86,7 @@ export default function CardsCarousel({ cards }) {
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.1}
                 onDragEnd={(e, { offset, velocity }) => {
+                    /* Taken from framer-motion docs */
                     const swipe = swipePower(offset.x, velocity.x);
 
                     if (swipe < -swipeConfidenceThreshold) {
@@ -92,6 +95,7 @@ export default function CardsCarousel({ cards }) {
                         moveCarousel(currentIndexPrior, smallScreen ? -300 : -400);
                     }
                 }}>
+                {/* Render prior card */}
                 <motion.div
                     className='prior-card'
                     variants={cardVariant(offsetX)}
@@ -99,14 +103,13 @@ export default function CardsCarousel({ cards }) {
                     exit='exit'>
                     <Card card={cards[currentIndexPrior]} />
                 </motion.div>
-
-                <div className='active-card'>
-                    <motion.div
-                        variants={cardVariant(offsetX)}
-                        animate={cardVariantName === 'start' ? 'active' : 'stopActive'}>
-                        <Card card={cards[currentIndex]} />
-                    </motion.div>
-                </div>
+                {/* Render active card */}
+                <motion.div
+                    variants={cardVariant(offsetX)}
+                    animate={cardVariantName === 'start' ? 'active' : 'stopActive'}>
+                    <Card card={cards[currentIndex]} />
+                </motion.div>
+                {/* Render previous card */}
                 <motion.div
                     className='previous-card'
                     variants={cardVariant(offsetX)}
