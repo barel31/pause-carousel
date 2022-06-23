@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/pause-carousel/static/css/main.90713582.css",
-    "main.js": "/pause-carousel/static/js/main.e311cfac.js",
+    "main.css": "/pause-carousel/static/css/main.cea189a7.css",
+    "main.js": "/pause-carousel/static/js/main.72e1ac36.js",
     "static/media/ProfileMelanieCruise.jpg": "/pause-carousel/static/media/ProfileMelanieCruise.661beccc33c29eb9eea1.jpg",
     "static/media/ProfileTomYorke.jpg": "/pause-carousel/static/media/ProfileTomYorke.aba288492b8fb0a1510a.jpg",
     "static/media/ProfileBarLevi.jpg": "/pause-carousel/static/media/ProfileBarLevi.a9b3435f8b6fe74872b6.jpg",
@@ -14,11 +14,11 @@
     "static/media/card-wave-bg0.svg": "/pause-carousel/static/media/card-wave-bg0.9059ae5ffe3be01b458f.svg",
     "static/media/card-wave-bg1.svg": "/pause-carousel/static/media/card-wave-bg1.3fe1e587298b2b21f3b9.svg",
     "static/media/card-wave-bg2.svg": "/pause-carousel/static/media/card-wave-bg2.3f55a2df9235ef99835b.svg",
-    "main.90713582.css.map": "/pause-carousel/static/css/main.90713582.css.map",
-    "main.e311cfac.js.map": "/pause-carousel/static/js/main.e311cfac.js.map"
+    "main.cea189a7.css.map": "/pause-carousel/static/css/main.cea189a7.css.map",
+    "main.72e1ac36.js.map": "/pause-carousel/static/js/main.72e1ac36.js.map"
   },
   "entrypoints": [
-    "static/css/main.90713582.css",
-    "static/js/main.e311cfac.js"
+    "static/css/main.cea189a7.css",
+    "static/js/main.72e1ac36.js"
   ]
 }
