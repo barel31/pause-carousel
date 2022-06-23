@@ -35,15 +35,15 @@ const cardVariant = (offsetX) => ({
 });
 
 // Taken from framer-motion docs
-const swipeConfidenceThreshold = 10000;
+const swipeConfidenceThreshold = 5000;
 const swipePower = (offset, velocity) => {
     return Math.abs(offset) * velocity;
 };
 
 export default function CardsCarousel({ cards }) {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [offsetX, setoffsetX] = useState(0);
-    const [cardVariantName, setCardVariantName] = useState('stop');
+    const [offsetX, setoffsetX] = useState(400);
+    const [cardAnimateName, setCardAnimateName] = useState('stop');
 
     // Get the previous and the prior cards
     const currentIndexPrevius = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
@@ -71,10 +71,10 @@ export default function CardsCarousel({ cards }) {
 
     // Start animation on cards
     const startCardAnimation = () => {
-        setCardVariantName('start');
+        setCardAnimateName('start');
         const animationTimeOut = setTimeout(() => {
             clearTimeout(animationTimeOut);
-            setCardVariantName('stop');
+            setCardAnimateName('stop');
         }, 100);
     };
 
@@ -84,7 +84,7 @@ export default function CardsCarousel({ cards }) {
                 className='cards'
                 drag='x'
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.1}
+                dragElastic={0.25}
                 onDragEnd={(e, { offset, velocity }) => {
                     /* Taken from framer-motion docs */
                     const swipe = swipePower(offset.x, velocity.x);
@@ -99,21 +99,21 @@ export default function CardsCarousel({ cards }) {
                 <motion.div
                     className='prior-card'
                     variants={cardVariant(offsetX)}
-                    animate={cardVariantName === 'start' ? 'prior' : 'stop'}
+                    animate={cardAnimateName === 'start' ? 'prior' : 'stop'}
                     exit='exit'>
                     <Card card={cards[currentIndexPrior]} />
                 </motion.div>
                 {/* Render active card */}
                 <motion.div
                     variants={cardVariant(offsetX)}
-                    animate={cardVariantName === 'start' ? 'active' : 'stopActive'}>
+                    animate={cardAnimateName === 'start' ? 'active' : 'stopActive'}>
                     <Card card={cards[currentIndex]} />
                 </motion.div>
                 {/* Render previous card */}
                 <motion.div
                     className='previous-card'
                     variants={cardVariant(offsetX)}
-                    animate={cardVariantName === 'start' ? 'previous' : 'stop'}>
+                    animate={cardAnimateName === 'start' ? 'previous' : 'stop'}>
                     <Card card={cards[currentIndexPrevius]} />
                 </motion.div>
             </motion.div>
