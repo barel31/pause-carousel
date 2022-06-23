@@ -83,13 +83,13 @@ export default function CardsCarousel({ cards }) {
                 drag='x'
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={1}
-                onDragEnd={(_, { offset, velocity }) => {
+                onDragEnd={(e, { offset, velocity }) => {
                     const swipe = swipePower(offset.x, velocity.x);
 
                     if (swipe < -swipeConfidenceThreshold) {
-                        setCurrentIndex(currentIndexPrevius);
+                        moveCarousel(currentIndexPrior, bigScreen ? 300 : 400);
                     } else if (swipe > swipeConfidenceThreshold) {
-                        setCurrentIndex(currentIndexPrior);
+                        moveCarousel(currentIndexPrevius, bigScreen ? -300 : -400);
                     }
                 }}>
                 <AnimatePresence>
