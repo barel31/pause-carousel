@@ -81,8 +81,8 @@ export default function CardsCarousel({ cards }) {
             <motion.div
                 className='cards'
                 drag='x'
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={1}
+                dragConstraints={{ left: 100, right: 0 }}
+                dragElastic={0.1}
                 onDragEnd={(e, { offset, velocity }) => {
                     const swipe = swipePower(offset.x, velocity.x);
 
