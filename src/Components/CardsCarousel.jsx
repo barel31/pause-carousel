@@ -35,41 +35,43 @@ const cardVariant = (offsetX) => ({
 });
 
 // Taken from framer-motion docs
-const swipeConfidenceThreshold = 5000;
+const swipeConfidenceThreshold = 2500;
 const swipePower = (offset, velocity) => {
     return Math.abs(offset) * velocity;
 };
 
 export default function CardsCarousel({ cards }) {
+    const smallScreen = useMediaQuery({ query: `(max-width: 1200px)` });
+
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [offsetX, setoffsetX] = useState(400);
+    const [offsetX, setOffsetX] = useState(smallScreen ? 300 : 400);
     const [cardAnimateName, setCardAnimateName] = useState('stop');
 
     // Get the previous and the prior cards
-    const currentIndexPrevius = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
+    const currentIndexPrevious = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
     const currentIndexPrior = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
 
-    const smallScreen = useMediaQuery({ query: `(max-width: 1200px)` });
-
-    // Slide cards every 10 secs
     useEffect(() => {
+        // Slide cards every 10 secs
         const sliderInterval = setInterval(() => {
-            setCurrentIndex(offsetX > 0 ? currentIndexPrevius : currentIndexPrior);
-            startCardAnimation();
+            moveCarousel(offsetX > 0 ? currentIndexPrevious : currentIndexPrior, offsetX > 0 ? 'right' : 'left');
         }, 10000);
 
-        // Clear The interval on unmount
+        // clear The interval on unmount
         return () => clearInterval(sliderInterval);
     }, [currentIndex]);
 
     // Move carousel with animation
-    const moveCarousel = (cardIndex, x) => {
+    const moveCarousel = (cardIndex, direction) => {
         setCurrentIndex(cardIndex);
-        setoffsetX(x === offsetX ? x + 1 : x);
+
+        const x = smallScreen ? -300 : -400;
+
+        setOffsetX(direction === 'left' ? x : Math.abs(x));
         startCardAnimation();
     };
 
-    // Start animation on cards
+    // Start carousel animation
     const startCardAnimation = () => {
         setCardAnimateName('start');
         const animationTimeOut = setTimeout(() => {
@@ -90,9 +92,9 @@ export default function CardsCarousel({ cards }) {
                     const swipe = swipePower(offset.x, velocity.x);
 
                     if (swipe < -swipeConfidenceThreshold) {
-                        moveCarousel(currentIndexPrevius, smallScreen ? 300 : 400);
+                        moveCarousel(currentIndexPrevious, 'right');
                     } else if (swipe > swipeConfidenceThreshold) {
-                        moveCarousel(currentIndexPrior, smallScreen ? -300 : -400);
+                        moveCarousel(currentIndexPrior, 'left');
                     }
                 }}>
                 {/* Render prior card */}
@@ -114,14 +116,14 @@ export default function CardsCarousel({ cards }) {
                     className='previous-card'
                     variants={cardVariant(offsetX)}
                     animate={cardAnimateName === 'start' ? 'previous' : 'stop'}>
-                    <Card card={cards[currentIndexPrevius]} />
+                    <Card card={cards[currentIndexPrevious]} />
                 </motion.div>
             </motion.div>
             <div className='cards-btns'>
-                <div onClick={() => moveCarousel(currentIndexPrior, smallScreen ? -300 : -400)}>
+                <div onClick={() => moveCarousel(currentIndexPrior, 'left')}>
                     <HiChevronLeft />
                 </div>
-                <div onClick={() => moveCarousel(currentIndexPrevius, smallScreen ? 300 : 400)}>
+                <div onClick={() => moveCarousel(currentIndexPrevious, 'right')}>
                     <HiChevronRight />
                 </div>
             </div>
