@@ -31,7 +31,6 @@ const cardVariant = (offsetX) => ({
         opacity: 1,
     },
     stop: { x: 0, scale: 0.8, opacity: 0.6 },
-    exit: { x: offsetX > 0 ? -600 : 600, scale: 0, opacity: 0 },
 });
 
 // Taken from framer-motion docs
@@ -63,10 +62,9 @@ export default function CardsCarousel({ cards }) {
 
     // Move carousel with animation
     const moveCarousel = (cardIndex, direction) => {
-        setCurrentIndex(cardIndex);
-
         const x = smallScreen ? -300 : -400;
 
+        setCurrentIndex(cardIndex);
         setOffsetX(direction === 'left' ? x : Math.abs(x));
         startCardAnimation();
     };
@@ -102,7 +100,7 @@ export default function CardsCarousel({ cards }) {
                     className='prior-card'
                     variants={cardVariant(offsetX)}
                     animate={cardAnimateName === 'start' ? 'prior' : 'stop'}
-                    exit='exit'>
+                    onClick={() => moveCarousel(currentIndexPrior, 'left')}>
                     <Card card={cards[currentIndexPrior]} />
                 </motion.div>
                 {/* Render active card */}
@@ -115,7 +113,8 @@ export default function CardsCarousel({ cards }) {
                 <motion.div
                     className='previous-card'
                     variants={cardVariant(offsetX)}
-                    animate={cardAnimateName === 'start' ? 'previous' : 'stop'}>
+                    animate={cardAnimateName === 'start' ? 'previous' : 'stop'}
+                    onClick={() => moveCarousel(currentIndexPrevious, 'right')}>
                     <Card card={cards[currentIndexPrevious]} />
                 </motion.div>
             </motion.div>
